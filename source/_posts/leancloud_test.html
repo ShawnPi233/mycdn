@@ -1,0 +1,265 @@
+<html>
+
+<head>
+  <title>音乐生成质量调研</title>
+
+  <!-- 引入valine的js文件 -->
+  <!-- <script src="//unpkg.com/valine/dist/Valine.min.js">	</script> -->
+  <script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+  <!-- 添加一个style标签，定义单选按钮的样式 -->
+  <style>
+    input[type="radio"] {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-color: transparent;
+          border: 0;
+          outline: 0 !important;
+          line-height: 20px;
+          color: #d8d8d8;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <p>第一部分：以下为3段音乐片段,请在聆听后回答问题Q1至Q5,所有选项均为单选题</p>
+    <p>音乐片段1</p>
+    <form id="my-form">
+       <audio
+          controls
+          preload="auto"
+          src="/audios/1.mp3">
+      </audio>
+      
+      <p>Q1: 请问这是人工作曲的还是模型生成的音乐？</p>
+      <p><input type="radio" name="is_generated_1" value="人工作曲" required >人工作曲
+      <input type="radio" name="is_generated_1" value="模型生成">模型生成 </p>
+      
+      <p>Q2: 请问这是什么风格的音乐</p>
+      <p><input type="radio" name="music_class_1" value="古典" required>古典
+      <input type="radio" name="music_class_1" value="爵士">爵士
+      <input type="radio" name="music_class_1" value="流行">流行</p>
+      
+      <p>Q3: 请问该音乐的旋律性如何(满分5分)？</p>
+      <p><input type="radio" name="harmony_score_1" value="1" required>糟糕(1)
+      <input type="radio" name="harmony_score_1" value="2">较差(2)
+      <input type="radio" name="harmony_score_1" value="3">一般(3)    
+      <input type="radio" name="harmony_score_1" value="4">较好(4)    
+      <input type="radio" name="harmony_score_1" value="5">优秀(5)</p>
+      
+      <p>Q4: 请问该音乐的创造力如何？</p>
+      <p><input type="radio" name="creative_score_1" value="1" required>糟糕(1)
+      <input type="radio" name="creative_score_1" value="2">较差(2)
+      <input type="radio" name="creative_score_1" value="3">一般(3)    
+      <input type="radio" name="creative_score_1" value="4">较好(4)   
+      <input type="radio" name="creative_score_1" value="5">优秀(5)</p>
+    
+      <p>音乐片段2</p>
+         <audio
+            controls
+            preload="auto"
+            src="/audios/2.mp3">
+        </audio>
+        
+        <p>Q1: 请问这是人工作曲的还是模型生成的音乐？</p>
+        <p><input type="radio" name="is_generated_2" value="人工作曲" required>人工作曲
+        <input type="radio" name="is_generated_2" value="模型生成">模型生成</p>
+        
+        <p>Q2: 请问这是什么风格的音乐(满分5分)？</p>
+        <p><input type="radio" name="music_class_2" value="古典" required>古典
+        <input type="radio" name="music_class_2" value="爵士">爵士
+        <input type="radio" name="music_class_2" value="流行">流行</p>
+        
+        <p>Q3: 请问该音乐的旋律性如何(满分5分)？</p>
+        <p><input type="radio" name="harmony_score_2" value="1" required>糟糕(1)
+        <input type="radio" name="harmony_score_2" value="2">较差(2)
+        <input type="radio" name="harmony_score_2" value="3">一般(3)    
+        <input type="radio" name="harmony_score_2" value="4">较好(4)    
+        <input type="radio" name="harmony_score_2" value="5">优秀(5)</p>
+        
+        <p>Q4: 请问该音乐的创造力如何？</p>
+        <p><input type="radio" name="creative_score_2" value="1" required>糟糕(1)
+        <input type="radio" name="creative_score_2" value="2">较差(2)
+        <input type="radio" name="creative_score_2" value="3">一般(3)    
+        <input type="radio" name="creative_score_2" value="4">较好(4)   
+        <input type="radio" name="creative_score_2" value="5">优秀(5)</p>
+    
+        <p>音乐片段3</p>
+           <audio
+              controls
+              preload="auto"
+              src="/audios/3.mp3">
+          </audio>
+          
+          <p>Q1: 请问这是人工作曲的还是模型生成的音乐？</p>
+          <p><input type="radio" name="is_generated_3" value="人工作曲" required>人工作曲
+          <input type="radio" name="is_generated_3" value="模型生成">模型生成</p>
+          
+          <p>Q2: 请问这是什么风格的音乐(满分5分)？</p>
+          <p><input type="radio" name="music_class_3" value="古典" required>古典
+          <input type="radio" name="music_class_3" value="爵士">爵士
+          <input type="radio" name="music_class_3" value="流行">流行</p>
+          
+          <p>Q3: 请问该音乐的旋律性如何(满分5分)？</p>
+          <p><input type="radio" name="harmony_score_3" value="1" required>糟糕(1)
+          <input type="radio" name="harmony_score_3" value="2">较差(2)
+          <input type="radio" name="harmony_score_3" value="3">一般(3)    
+          <input type="radio" name="harmony_score_3" value="4">较好(4)    
+          <input type="radio" name="harmony_score_3" value="5">优秀(5)</p>
+          
+          <p>Q4: 请问该音乐的创造力如何？</p>
+          <p><input type="radio" name="creative_score_3" value="1" required>糟糕(1)
+          <input type="radio" name="creative_score_3" value="2">较差(2)
+          <input type="radio" name="creative_score_3" value="3">一般(3)    
+          <input type="radio" name="creative_score_3" value="4">较好(4)   
+          <input type="radio" name="creative_score_3" value="5">优秀(5)</p>
+    
+        <p>第二部分：以下为2段音乐片段,请在聆听后回答问题Q1至Q5,所有选项均为单选题</p>
+        <p>音乐片段4</p>
+           <audio
+              controls
+              preload="auto"
+              src="/audios/4.mp3">
+          </audio>
+          
+          <p>Q1: 请问这是人工作曲的还是模型生成的音乐？</p>
+          <p><input type="radio" name="is_generated_4" value="人工作曲" required>人工作曲
+          <input type="radio" name="is_generated_4" value="模型生成">模型生成</p>
+          
+          <p>Q2: 请问这是什么风格的音乐？</p>
+          <p><input type="radio" name="music_class_4" value="古典" required>古典
+          <input type="radio" name="music_class_4" value="爵士">爵士
+          <input type="radio" name="music_class_4" value="流行">流行</p>
+          
+          <p>Q3: 请问该音乐的旋律性如何(满分5分)？</p>
+          <p><input type="radio" name="harmony_score_4" value="1" required>糟糕(1)
+          <input type="radio" name="harmony_score_4" value="2">较差(2)
+          <input type="radio" name="harmony_score_4" value="3">一般(3)    
+          <input type="radio" name="harmony_score_4" value="4">较好(4)    
+          <input type="radio" name="harmony_score_4" value="5">优秀(5)</p>
+          
+          <p>Q4: 请问该音乐的创造力如何？</p>
+          <p><input type="radio" name="creative_score_4" value="1" required>糟糕(1)
+          <input type="radio" name="creative_score_4" value="2">较差(2)
+          <input type="radio" name="creative_score_4" value="3">一般(3)    
+          <input type="radio" name="creative_score_4" value="4">较好(4)   
+          <input type="radio" name="creative_score_4" value="5">优秀(5)</p>
+
+          <p>音乐片段5</p>
+          <audio
+             controls
+             preload="auto"
+             src="/audios/4.mp3">
+         </audio>
+         
+         <p>Q1: 请问这是人工作曲的还是模型生成的音乐？</p>
+         <p><input type="radio" name="is_generated_5" value="人工作曲" required>人工作曲
+         <input type="radio" name="is_generated_5" value="模型生成">模型生成</p>
+         
+         <p>Q2: 请问这是什么风格的音乐？</p>
+         <p><input type="radio" name="music_class_5" value="古典" required>古典
+         <input type="radio" name="music_class_5" value="爵士">爵士
+         <input type="radio" name="music_class_5" value="流行">流行</p>
+         
+         <p>Q3: 请问该音乐的旋律性如何(满分5分)？</p>
+         <p><input type="radio" name="harmony_score_5" value="1" required>糟糕(1)
+         <input type="radio" name="harmony_score_5" value="2">较差(2)
+         <input type="radio" name="harmony_score_5" value="3">一般(3)    
+         <input type="radio" name="harmony_score_5" value="4">较好(4)    
+         <input type="radio" name="harmony_score_5" value="5">优秀(5)</p>
+         
+         <p>Q4: 请问该音乐的创造力如何？</p>
+         <p><input type="radio" name="creative_score_5" value="1" required>糟糕(1)
+         <input type="radio" name="creative_score_5" value="2">较差(2)
+         <input type="radio" name="creative_score_5" value="3">一般(3)    
+         <input type="radio" name="creative_score_5" value="4">较好(4)   
+         <input type="radio" name="creative_score_5" value="5">优秀(5)</p>
+          
+          <p>Q5: 请问音乐片段4和5哪个更好？</p>
+          <p><input type="radio" name="music_score_5" value="A" required>音乐片段4
+          <input type="radio" name="music_score_5" value="B">音乐片段5
+
+          <p><input type="submit" id="my_submit" value="提交"></p>
+    </form>
+  
+  <script>
+      function checkRadioValue(name, i) {
+      // 获取单选框的值
+      var checked = document.querySelector(`input[name='${name}_${i}']:checked`);
+      var value = checked ? checked.value : "";
+      // 判断单选框的值是否为空
+      if (value == "") {
+        var dict = {is_generated: "Q1", music_class: "Q2", harmony_score: "Q3", creative_score: "Q4", music_score: "Q5"};
+        // 弹出一个警告框，提示用户重新输入
+        question = dict[name]
+        alert(`第${i}个音乐片段的${question}问题未填写，请重新填写！`);
+        // 返回空值
+        return "";
+      } else {
+        // 单选框的值不为空，返回该值
+        return value;
+      }
+    }
+
+    // 初始化leancloud的应用ID和应用Key
+    // var APP_ID = 'bW7ca26Fgl1LvXlJpBq0w9uG-MdYXbMMI'; //国际版
+    // var APP_KEY = 'U85ANTgGGYMiLY7tUHYWPGkN';
+
+    var APP_ID = 'xBfywiBcWnaBX5res3WKixrN-gzGzoHsz';
+    var APP_KEY = 'V1kk03BwJEHc3dLLYtKqCvnN';
+    AV.init({
+      appId: APP_ID,
+      appKey: APP_KEY,
+      serverURLs: 'https://xbfywibc.lc-cn-n1-shared.com'
+      // serverURLs: 'https://cn1-api.leancloud.cn' //国内版，华北节点
+    });
+  
+    // 获取html表单元素
+    var form = document.getElementById('my-form');
+    var content = "";
+    // 监听表单的提交事件
+    form.addEventListener('submit', function(event) {
+      // 阻止表单的默认提交行为
+      event.preventDefault();
+  
+      for (var i = 1;i <= 4; i++){
+        var A1 = checkRadioValue('is_generated', i);
+        var A2 = checkRadioValue('music_class', i);
+        var A3 = checkRadioValue('harmony_score', i);
+        var A4 = checkRadioValue('creative_score', i);
+        content = content + '--音乐'+ i + ' [Q1:'+ A1 +']' + ' [Q2:'+ A2 +']'+' [Q3:'+ A3 +']'+' [Q4:'+ A4 +']--';
+      }
+  
+      var A1 = checkRadioValue('is_generated', 5);
+      var A2 = checkRadioValue('music_class', 5);
+      var A3 = checkRadioValue('harmony_score', 5);
+      var A4 = checkRadioValue('creative_score', 5);
+      var A5 = checkRadioValue('music_score', 5);
+      content = content + '--音乐'+ i + ' [Q1:'+ A1 +']' + ' [Q2:'+ A2 +']'+' [Q3:'+ A3 +']'+' [Q4:'+ A4 +']' +' [Q5:'+ A5 +']--';
+      // 创建一个leancloud的对象类，用于存储表单信息
+      var FormInfo = AV.Object.extend('form_data'); //这里form_data即我们创建好的class的类名，主要大小写也要一致
+  
+      // 创建一个FormInfo的实例
+      var formInfo = new FormInfo();
+  
+      // 设置实例的属性值
+      formInfo.set('result', content);
+  
+      // 将实例保存到leancloud的后端服务中
+      formInfo.save().then(function (formInfo) {
+        // 成功保存后，打印日志并显示提示信息
+        console.log('保存成功，表单信息为' + formInfo.result);
+        alert('提交成功，感谢您的反馈！');
+        var submitButton = document.getElementById("my_submit");
+        submitButton.disabled = true;
+      }, function (error) {
+        // 失败保存后，打印错误信息并显示提示信息
+        console.error(error);
+        alert('提交失败，可能您当前网络较差，请稍后重试！');
+      });
+    });
+  </script>
+</body>
+</html>

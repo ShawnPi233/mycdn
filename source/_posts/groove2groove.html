@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+  
+    Demo
+     &ndash; Groove2Groove
+  
+</title>
+<meta name="description" content="One-shot style transfer for music accompaniments">
+<meta name="keywords" content="grv2grv, style transfer, music style, midi, accompaniment, band in a box, bandinabox, dataset, artificial intelligence, machine learning, neural network, taslp">
+
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha512-UyNhw5RNpQaCai2EdC+Js0QL4RlVmiq41DkmCJsRV3ZxipG2L0HhTqIf/H9Hp8ez2EnFlkBnjRGJU2stW3Lj+w==" crossorigin="anonymous">
+
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://www.telecom-paris.fr/wp-content-EvDsK19/themes/telecom-paristech/assets/images/apple-icon60x60.png">
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://www.telecom-paris.fr/wp-content-EvDsK19/themes/telecom-paristech/assets/images/apple-icon76x76.png">
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://www.telecom-paris.fr/wp-content-EvDsK19/themes/telecom-paristech/assets/images/apple-icon120x120.png">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://www.telecom-paris.fr/wp-content-EvDsK19/themes/telecom-paristech/assets/images/apple-icon152x152.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://www.telecom-paris.fr/wp-content-EvDsK19/themes/telecom-paristech/assets/images/apple-icon180x180.png">
+<link rel="shortcut icon" href="https://www.telecom-paris.fr/favicon.ico" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Groove2Groove" />
+<meta property="og:image" content="https://groove2groove.telecom-paris.fr/assets/img/og-image.png" />
+<meta property="og:site_name" content="Groove2Groove" />
+<meta property="og:url" content="https://groove2groove.telecom-paris.fr" />
+<meta property="og:description" content="One-shot style transfer for music accompaniments" />
+
+<meta name="twitter:image:src" content="https://groove2groove.telecom-paris.fr/assets/img/og-image.png" />
+<meta name="twitter:creator" content="@cifkao" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Groove2Groove" />
+<meta name="twitter:description" content="One-shot style transfer for music accompaniments" />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark">
+  <div class="container">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link " href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/demo.html">Demo</a>
+        </li>
+      </ul>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+
+    <header style="background-image: url('/assets/img/splash-vinyls.jpg')">
+  <div class="container">
+    <div class="heading"><a href="/">Groove2Groove</a></div>
+    <div class="subheading">
+      One-shot style transfer for music accompaniments
+    </div>
+  </div>
+</header>
+
+
+<main class="container">
+  <h1>Style transfer demo <span id="pageLoadingIndicator" class="spinner-border text-primary ml-2" style="font-size: 12px; position: relative; bottom: 2px;" role="status"></span></h1>
+  <div class="content" style="display: none;">
+    <div class="card floating-card">
+      <div class="card-header">
+        <big class="d-flex" style="align-items: center;">
+          <div class="mr-auto">Advanced mode</div>
+          <input id="advancedModeToggle" type="checkbox" data-toggle="toggle" data-onstyle="success" data-width="80" data-height="22">
+        </big>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          In advanced mode, you can upload arbitrary MIDI files as inputs and change the model settings.
+        </p>
+      </div>
+    </div>
+
+    <div class="d-flex clearfix">
+      <div>
+        <div data-hide-in-advanced>
+          <p>Click the button below and pick one of the available examples.</p>
+        </div>
+
+        <p data-show-in-advanced>Either pick one of the pre-generated examples, or <strong>upload your own content &amp; style input</strong> by clicking <strong>Browse</strong> below.</p>
+
+        <button type="button" id="presetsButton" class="btn btn-primary d-block mx-auto mb-3">
+          <span class="px-4"><span class="oi oi-spreadsheet" aria-hidden="true"></span> Load example&hellip;</span>
+        </button>
+
+        <div data-hide-in-advanced>
+          <p>For each example, you will see first the two inputs (<strong>content</strong> and <strong>style</strong>), then the <strong>generated accompaniment</strong>, and finally a <strong>remix</strong> of the accompaniment with the original melody.
+             You can play or save each file, choosing the tracks that you want to include.
+             In some cases, we have muted some of the tracks to reduce clutter, but you can unmute them by checking the corresponding boxes.</p>
+        </div>
+
+        <p>We recommend listening through headphones. If you experience glitches during playback, try refreshing the page, opening it in a different browser, or saving the MIDI file and playing it locally.</p>
+
+        <div class="alert alert-warning" data-show-in-advanced>
+           <strong>Heads up!</strong> The models are running on our server, so we have put some limits in place to prevent overloading it.
+           Also bear in mind that some files work better than others.
+           Some inputs may make the model go haywire, cause playback glitches, or crash your browser.
+           If you run into problems, just try a different input.
+           If problems persist, <a href="https://github.com/cifkao/groove2groove/issues" target="_blank">let us know</a>.
+        </div>
+      </div>
+    </div>
+
+    <div class="section" data-sequence-id="content">
+      <h2 id="conent-input">Content input<span data-hide-in-advanced>: <code class="input-filename"></code></span></h2>
+      <p data-show-in-advanced>Pick a song to cover. The song needs to be in 4/4, so don't pick a waltz!
+         <span class='after-content-loaded'>You can choose a specific section of the song by specifying the start and end time in beats below. Please make sure that it starts on a downbeat.</span></p>
+      <div class="row" style="clear: both" data-show-in-advanced>
+        <div class="input-group col-md-4 col-lg-6 mb-1 mb-md-0">
+          <div class="custom-file">
+            <input id="contentFile" name="contentFile" type="file" class="custom-file-input midi-input">
+             <label for="contentFile" class="custom-file-label input-filename text-truncate">Choose MIDI file&hellip;</label>
+          </div>
+        </div>
+        <div class="input-group col-sm-6 col-md-4 col-lg-3 mb-1 mb-sm-0 after-content-loaded">
+          <div class="input-group-prepend">
+            <label for="contentStartTime" class="input-group-text">Start beat</label>
+          </div>
+          <input type="number" class="form-control start-time" id="contentStartTime" name="contentStartTime" value="0" min="0" step="1">
+        </div>
+        <div class="input-group col-sm-6 col-md-4 col-lg-3 after-content-loaded">
+          <div class="input-group-prepend">
+            <label for="contentEndTime" class="input-group-text">End beat</label>
+          </div>
+          <input type="number" class="form-control end-time" id="contentEndTime" name="contentEndTime" min="0" step="1">
+        </div>
+      </div>
+      <div class="card visualizer-card mt-2 after-content-loaded">
+        <div class="card-header">
+          <div class="d-flex flex-row">
+            <div class="p-2">Instruments:</div>
+            <div class="p-2 instrument-toggles">
+            </div>
+          </div>
+        </div>
+        <div class="visualizer-container">
+          <div class="beat-bar" data-show-in-advanced></div>
+          <svg></svg>
+        </div>
+        <div class="card-footer">
+          <form class="form-inline d-flex mb-0">
+            <div class="input-group p-2">
+              <button type="button" class="btn btn-primary save-button"><span class="oi oi-data-transfer-download" title="Save" aria-hidden="true"></span> Save</button>
+            </div>
+            <div class="input-group p-2">
+              <button type="button" class="btn btn-primary play-button"><span class="oi oi-media-play" title="Play" aria-hidden="true"></span> <span class="text">Play</span></button>
+            </div>
+            <div class="input-group p-2 flex-grow-1">
+              <input type="range" class="custom-range seek-slider" min="0" value="0" step="0.1" disabled>
+            </div>
+            <div class="input-group p-2">
+              <div class="input-group-prepend">
+                <label for="contentTempo" class="input-group-text">Tempo</label>
+              </div>
+              <input type="number" class="form-control tempo" id="contentTempo" name="contentTempo" min="20" step="any" max="300" size="4">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="section after-content-loaded" data-sequence-id="style">
+      <h2>Style input<span data-hide-in-advanced>: <code class="input-filename"></code></span></h2>
+      <p data-show-in-advanced>This is the song to take the style from. For best results, pick an 8-bar (32-beat) section.</p>
+      <div class="row" data-show-in-advanced>
+        <div class="input-group col-md-4 col-lg-6 mb-1 mb-md-0">
+          <div class="custom-file">
+             <input id="styleFile" name="styleFile" type="file" class="custom-file-input midi-input">
+             <label for="styleFile" class="custom-file-label input-filename text-truncate">Choose MIDI file&hellip;</label>
+          </div>
+        </div>
+        <div class="input-group col-sm-6 col-md-4 col-lg-3 mb-1 mb-sm-0 after-style-loaded">
+          <div class="input-group-prepend">
+            <label for="styleStartTime" class="input-group-text">Start beat</label>
+          </div>
+          <input type="number" class="form-control start-time" id="styleStartTime" name="styleStartTime" value="0" min="0" step="1">
+        </div>
+        <div class="input-group col-sm-6 col-md-4 col-lg-3 after-style-loaded">
+          <div class="input-group-prepend">
+            <label for="styleEndTime" class="input-group-text">End beat</label>
+          </div>
+          <input type="number" class="form-control end-time" id="styleEndTime" name="styleEndTime" min="0" step="1">
+        </div>
+      </div>
+      <div class="card visualizer-card mt-2 after-style-loaded">
+        <div class="card-header">
+          <div class="d-flex flex-row">
+            <div class="p-2">Instruments:</div>
+            <div class="p-2 instrument-toggles">
+            </div>
+          </div>
+        </div>
+        <div class="visualizer-container">
+          <div class="beat-bar" data-show-in-advanced></div>
+          <svg></svg>
+        </div>
+        <div class="card-footer">
+          <form class="form-inline d-flex mb-0">
+            <div class="input-group p-2">
+              <button type="button" class="btn btn-primary save-button"><span class="oi oi-data-transfer-download" title="Save" aria-hidden="true"></span> Save</button>
+            </div>
+            <div class="input-group p-2">
+              <button type="button" class="btn btn-primary play-button"><span class="oi oi-media-play" title="Play" aria-hidden="true"></span> <span class="text">Play</span></button>
+            </div>
+            <div class="input-group p-2 flex-grow-1">
+              <input type="range" class="custom-range seek-slider" min="0" value="0" step="0.1" disabled>
+            </div>
+            <div class="input-group p-2">
+              <div class="input-group-prepend">
+                <label for="styleTempo" class="input-group-text">Tempo</label>
+              </div>
+              <input type="number" class="form-control tempo" id="styleTempo" name="styleTempo" min="20" step="any" max="300" size="4">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="section after-style-loaded" data-sequence-id="output">
+      <h2>Output</h2>
+      <div data-hide-in-advanced>
+        <p>This is the accompaniment generated by our model when given the above inputs. Use the checkboxes below to mute or unmute individual tracks in order to hear them more clearly.</p>
+      </div>
+      <div data-show-in-advanced>
+        <p>Now listen to an accompaniment generated by one of our models (if you have loaded custom inputs above, click <strong>Generate</strong> now).
+           We recommend using the model <strong>without velocity</strong>, which generally gives the best results.</p>
+        <p>Feel free to hit Generate again (with sampling enabled) to get a different result.
+           Try playing around with the temperature to make the result sound more or less &lsquo;random&rsquo;, but do not get burnt (safe values are around 0.6)!</p>
+      </div>
+      <form class="form-inline">
+        <div class="input-group mb-1 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              Model
+            </div>
+          </div>
+          <select class="form-control" id="modelName" name="modelName" disabled data-enable-in-advanced>
+            <option value="v01_drums">without velocity</option>
+            <option value="v01_drums_vel">with velocity</option>
+            <option value="v01_drums_vel_perf">with velocity, &Delta;-encoding</option>
+          </select>
+        </div>
+        <div class="input-group mb-1">
+          <div class="sampling-group input-group-prepend mb-1 mb-sm-0">
+            <span class="input-group-text">
+              <input type="checkbox" id="samplingCheckbox" name="samplingCheckbox" checked disabled data-enable-in-advanced>
+              <label for="samplingCheckbox" class="ml-1 mb-0">Sample with temperature:</label>
+            </span>
+          </div>
+          <input type="number" class="form-control" id="samplingTemperature" name="samplingTemperature" value="0.6" min="0.0" step="0.1" max="1.5" disabled data-enable-in-advanced>
+          <button type="button" class="btn btn-primary generate-button" disabled data-enable-in-advanced>
+            <span data-show-in-advanced><span class="oi oi-cog" title="Generate" aria-hidden="true"></span> Generate</span>
+            <span data-hide-in-advanced title="Enable advanced mode to generate"><span class="oi oi-ban" aria-hidden="true"></span> Generate</span>
+          </button>
+        </div>
+      </form>
+      <div class="card visualizer-card mt-2 after-output-loaded">
+        <div class="card-header">
+          <div class="d-flex flex-row">
+            <div class="p-2">Instruments:</div>
+            <div class="p-2 instrument-toggles"></div>
+          </div>
+        </div>
+        <div class="visualizer-container">
+          <div class="beat-bar" data-show-in-advanced></div>
+          <svg></svg>
+        </div>
+        <div class="card-footer">
+          <form class="form-inline d-flex mb-0">
+            <div class="input-group p-2">
+              <button type="button" class="btn btn-primary save-button"><span class="oi oi-data-transfer-download" title="Save" aria-hidden="true"></span> Save</button>
+            </div>
+            <div class="input-group p-2">
+              <button type="button" class="btn btn-primary play-button"><span class="oi oi-media-play" title="Play" aria-hidden="true"></span> <span class="text">Play</span></button>
+            </div>
+            <div class="input-group p-2 flex-grow-1">
+              <input type="range" class="custom-range seek-slider" min="0" value="0" step="0.1" disabled>
+            </div>
+            <div class="input-group p-2">
+              <div class="input-group-prepend">
+                <label for="outputTempo" class="input-group-text">Tempo</label>
+              </div>
+              <input type="number" class="form-control tempo" id="outputTempo" name="outputTempo" min="20" step="any" max="300" size="4">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="section after-output-loaded" data-sequence-id="remix">
+      <h2>Remix <button class="btn btn-success" id="sharePresetButton"><span class="oi oi-share icon-sm" title="Share" aria-hidden="true"></span> Share</button></h2>
+      <p data-hide-in-advanced>Here, we have created an actual cover song by combining the generated accompaniment with some of the tracks of the content input. You can use the checkboxes below to change which tracks are included, and create your own remix.</p>
+      <p data-show-in-advanced>Create an actual cover song by remixing the output with some of the original tracks (e.g.&nbsp;melody)!</p>
+      <div class="card visualizer-card mt-2 after-output-loaded">
+        <div class="card-header">
+          <div class="d-flex flex-row">
+            <div class="p-2">Output:</div>
+            <div class="p-2 instrument-toggles" id="remixOutputToggles"></div>
+          </div>
+          <div class="d-flex flex-row">
+            <div class="p-2">Content:</div>
+            <div class="p-2 instrument-toggles" id="remixContentToggles"></div>
+          </div>
+        </div>
+        <div class="visualizer-container">
+          <div class="beat-bar" data-show-in-advanced></div>
+          <svg></svg>
+        </div>
+        <div class="card-footer">
+          <form class="form-inline d-flex mb-0">
+            <div class="input-group p-2">
+              <button type="button" class="btn btn-primary save-button"><span class="oi oi-data-transfer-download" title="Save" aria-hidden="true"></span> Save</button>
+            </div>
+            <div class="input-group p-2">
+              <button type="button" class="btn btn-primary play-button"><span class="oi oi-media-play" title="Play" aria-hidden="true"></span> <span class="text">Play</span></button>
+            </div>
+            <div class="input-group p-2 flex-grow-1">
+              <input type="range" class="custom-range seek-slider" min="0" value="0" step="0.1" disabled>
+            </div>
+            <div class="input-group p-2">
+              <div class="input-group-prepend">
+                <label for="remixTempo" class="input-group-text">Tempo</label>
+              </div>
+              <input type="number" class="form-control tempo" id="remixTempo" name="remixTempo" min="20" step="any" max="300" size="4">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="modal" id="presetModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Examples</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table preset-table">
+          <colgroup>
+            <col style="width: 8em;">
+          </colgroup>
+          <thead>
+            <tr><th></th><th>Content</th><th>Style</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><button class="btn btn-block btn-success" data-preset-url="/data/presets/inwalked__december.json" data-content-name="In Walked Bud" data-style-name="December"><span class="oi icon-sm oi-arrow-circle-bottom" title="Load" aria-hidden="true"></span> Load</button></td>
+              <td>In Walked Bud (Thelonious Monk, unknown version) <a href="https://youtu.be/FuHjgKQDofs?t=13" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+              <td>December (Collective Soul) <a href="https://youtu.be/6exsatE-DUk?t=189" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-block btn-success" data-preset-url="/data/presets/lithium__fanvoy.json" data-content-name="Lithium" data-style-name="Fantastic Voyage"><span class="oi icon-sm oi-arrow-circle-bottom" title="Load" aria-hidden="true"></span> Load</button></td>
+              <td>Lithium (Nirvana) <a href="https://youtu.be/pkcJEvMcnEg" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+              <td>Fantastic Voyage (Lakeside) <a href="https://youtu.be/-1YjmXSyHa8?t=125" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-block btn-success" data-preset-url="/data/presets/yursong__atIknew.json" data-content-name="Your Song" data-style-name="And Then I Knew"><span class="oi icon-sm oi-arrow-circle-bottom" title="Load" aria-hidden="true"></span> Load</button></td>
+              <td>Your Song (Elton John) <a href="https://youtu.be/GlPlfCy1urI" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+              <td>And Then I Knew (Pat Metheny) <a href="https://youtu.be/35iZSbmRie8?t=71" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-block btn-success" data-preset-url="/data/presets/cumparsita_tango__sunflower.json" data-content-name="La cumparsita" data-style-name="Little Sunflower"><span class="oi icon-sm oi-arrow-circle-bottom" title="Load" aria-hidden="true"></span> Load</button></td>
+              <td>La cumparsita (Gerardo Matos Rodríguez) <a href="https://youtu.be/NY0MLG-IrSU" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+              <td>Little Sunflower (Freddie Hubbard, unknown version) <a href="https://youtu.be/OtB8dEuEmNM" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-block btn-success" data-preset-url="/data/presets/Mendelssohn-ViolinConcerto64-Alegro__van_halen-jump.json" data-content-name="Violin Concerto in E minor, I. Allegro molto appassionato" data-style-name="Jump"><span class="oi icon-sm oi-arrow-circle-bottom" title="Load" aria-hidden="true"></span> Load</button></td>
+              <td>Violin Concerto Op. 64 (Mendelssohn) <a href="https://youtu.be/fc00OQw59lM" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+              <td>Jump (Van Halen) <a href="https://youtu.be/SwYN7mTi6HM?t=14" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-block btn-success" data-preset-url="/data/presets/james_brown-i_feel_good__TECHNO.json" data-content-name="I Got You (I Feel Good)" data-style-name="TECHNO.MID"><span class="oi icon-sm oi-arrow-circle-bottom" title="Load" aria-hidden="true"></span> Load</button></td>
+              <td>I Got You (I Feel Good) (James Brown) <a href="https://youtu.be/U5TqIdff_DQ" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+              <td>TECHNO.MID (artist unknown)</td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-block btn-success" data-preset-url="/data/presets/Ill_Be_Missing_You__halfn.json" data-content-name="I'll Be Missing You" data-style-name="Half Nelson"><span class="oi icon-sm oi-arrow-circle-bottom" title="Load" aria-hidden="true"></span> Load</button></td>
+              <td>I'll Be Missing You (Puff Daddy/Sting) <a href="https://youtu.be/NKMtZm2YuBE?t=15" target="_blank"><span class="oi icon-sm oi-external-link" title="Listen on YouTube" aria-hidden="true"></span></a></td>
+              <td>Half Nelson (Miles Davis, unknown version)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="sharePresetModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Share your result</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ol>
+          <li>Download this file: <button class="link" id="presetDownloadButton"><span class="preset-filename"></span></button></li>
+          <li>Upload it somewhere, e.g.&nbsp;on <a href="https://gist.github.com/" target="_blank">GitHub Gist</a>.</li>
+          <li>Get the URL of the raw file (e.g.&nbsp;<code>https://gist.githubusercontent.com/&hellip;/<span class="preset-filename"></span></code>)
+              and paste it here:
+              <input type="text" class="form-control" id="uploadedPresetUrl" placeholder="https://&hellip;">
+          </li>
+          <li>Your shareable link will appear here:
+              <input type="text" class="form-control" id="presetShareUrl" readonly>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="loadingModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <span class="spinner-border spinner-border-sm text-primary mr-2" role="status"></span><span class="loading-text text-primary">Loading&hellip;</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="errorModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Error</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="error-text"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="footer">
+  <div class="container">
+    <div class="row" style="align-items: center;">
+      <div class="col-lg-4 col-xl-5 mb-2 mb-lg-0">
+        <p>Created by <a href="https://ondrej.cifka.com" target="_blank">Ondřej Cífka</a>
+        at <a href="https://www.telecom-paris.fr" target="_blank">Télécom Paris</a>.
+        <br class="d-none d-lg-inline">
+        Demo built with <a href="https://github.com/magenta/magenta-js/" target="_blank">Magenta.js</a>.</p>
+      </div>
+      <div class="col-lg-8 col-xl-7">
+        <img src="/assets/img/eu-flag.svg" alt="EU Flag" class="eu-flag">
+        <p>This project has received funding from the European Union's Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No. 765068 (<a href="https://mip-frontiers.eu/" target="_blank">MIP-Frontiers</a>).</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/js/0.bundle.js"></script><script src="/assets/js/1.bundle.js"></script><script src="/assets/js/demo.bundle.js"></script>
+
+
+    <script>
+  main.init({
+    apiUrl: 'https://indexweb.enst.fr:5000'
+  });
+</script>
+
+  </body>
+</html>
